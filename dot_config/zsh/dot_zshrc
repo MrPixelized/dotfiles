@@ -1,0 +1,112 @@
+# Style
+autoload -U colors && colors
+
+# Set the prompt based on the session type
+[[ -z $(who am i) ]] &&
+PROMPT="%{$fg[green]%}%n@%m:%{$fg_bold[blue]%}%2~%{$reset_color%}%(!.#.$) " ||
+PROMPT="%{$fg[green]%}%n@%m:%{$fg_bold[blue]%}%2~%{$reset_color%} %(!.#.$) "
+
+# Add timestamp info
+PROMPT="%{$fg[yellow]%}%D{%T} "$PROMPT
+# TMOUT=1
+# TRAPALRM() { zle reset-prompt }
+# preexec() { zle reset-prompt }
+reset-prompt-and-accept-line() {
+    zle reset-prompt
+    zle accept-line
+}
+
+zle -N reset-prompt-and-accept-line
+
+bindkey '^m' reset-prompt-and-accept-line
+
+# Import aliases
+source ~/.aliases
+
+# Make sure custom completions work
+fpath+=( ~/.local/share/zsh/site-functions )
+
+# Report directory changes to terminal using OSC-7 escape sequence
+function osc7-pwd() {
+    emulate -L zsh # also sets localoptions for us
+    setopt extendedglob
+    local LC_ALL=C
+    printf '\e]7;file://%s%s\e\' $HOST ${PWD//(#m)([^@-Za-z&-;_~])/%${(l:2::0:)$(([##16]#MATCH))}}
+}
+
+function chpwd-osc7-pwd() {
+    (( ZSH_SUBSHELL )) || osc7-pwd
+}
+autoload -U add-zsh-hook
+add-zsh-hook -Uz chpwd chpwd-osc7-pwd
+
+# Make cd optional
+setopt autocd
+
+# Use fzf to navigate when pressing ctrl+f
+bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
+
+# Vi mode
+bindkey -v
+export KEYTIMEOUT=1
+export MANPAGER='nvim +Man!'
+
+# Cursor variation depending on Vi mode
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+preexec() {
+	echo -ne "\e[5 q" ; # Use beam shape cursor for each new prompt.
+	title "$1 - ZSH" ; # Set the title of the terminal to the command being executed
+}
+precmd() {
+	title "$TERM" # Set the title of the terminal back to the terminal itself
+}
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+
+# History
+HISTFILE=~/.cache/zsh/zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+case $HIST_STAMPS in
+  "mm/dd/yyyy") alias history='fc -fl 1' ;;
+  "dd.mm.yyyy") alias history='fc -El 1' ;;
+  "yyyy-mm-dd") alias history='fc -il 1' ;;
+  *) alias history='fc -l 1' ;;
+esac
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
+
+# Make autojump work
+# [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+
+# Syntax highlighting
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# Autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char

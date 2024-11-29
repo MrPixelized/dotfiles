@@ -1,0 +1,31 @@
+#! /bin/zsh
+
+# Shell settings
+export EDITOR="vi"
+
+# Program-specific settings
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/mbsyncrc"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export TERMINAL="foot"
+export LEDGER_FILE="$HOME/documents/finance/hledger.journal"
+
+# Add rust stuff to path
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
+
+# Add kubernetes stuff to path
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# Wayland stuff
+# if [ -n "$IS_WAYLAND" ]; then
+	export THIS_IS_WAYLAND="yes"
+	export QT_QPA_PLATFORM="wayland;xcb"
+	export GDK_BACKEND="wayland,x11"
+	export SDL_VIDEODRIVER="wayland"
+	export CLUTTER_BACKEND="wayland"
+	export MOZ_ENABLE_WAYLAND=1
+	export QT_SCALE_FACTOR_ROUNDING_POLICY="RoundPreferFloor"
+# fi
+
+# Make sure these environment variables are also used by systemd
+dbus-update-activation-environment --systemd --all

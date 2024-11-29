@@ -1,0 +1,97 @@
+#/bin/bash
+
+alias xclip="xclip -selection clipboard"
+alias resource="source ~/.config/zsh/.zshrc"
+# alias qr="curl -F=\<- qrenco.de"
+alias qr="cliqr"
+alias ..="cd .."
+alias ls="ls --color"
+alias venv="venv-activate"
+alias hc="herbstclient"
+alias la="ls --color -A"
+alias hledger bs="hledger bs --pretty"
+
+cr() {
+    while IFS= read -r line; do
+		if [[ -n "$line" ]]; then
+			echo -ne "\r\033[K"
+			echo -ne "$line"
+		fi
+    done
+
+    echo
+}
+
+venv-activate () {
+	activation=$(fd -HIap1 --glob "$(pwd)/*/bin/activate")
+	venv=$(dirname "$activation" | xargs dirname | xargs basename)
+
+	active_venv=$(pip -V | cut -d " " -f 4- | rev | cut -d " " -f 3- | cut -d "/" -f 5- | rev)
+	if ls "$active_venv/bin" | grep "^activate$" &>/dev/null; then
+		echo "Virtual environment \"${active_venv#$(pwd)/}\" already activated"
+		return
+	fi
+
+	if [ "$venv" = "." ]; then
+		venv=".venv"
+		echo "Creating new virtual environment \"$venv\""
+		python -m venv "$venv"
+	fi
+
+	echo "Activating virtual environment \"$venv\""
+
+	source "$(pwd)/$venv/bin/activate"
+}
+
+soundcloud-sync () {
+	if [ -d ~/music/soundcloud ] || sshfs sync@ischa.dev:music ~/music; then
+		pushd
+		cd ~/music/soundcloud
+		youtube-dl https://soundcloud.com/pixelized-2/likes --add-metadata
+		popd
+	fi
+}
+
+cs () {
+	cd "$@" && ls
+}
+
+beep () {
+  if [ -z $1 ] ; then
+	1=1
+  fi
+  ffplay -f lavfi -i "sine=frequency=1200:duration=$1" -autoexit -nodisp >/dev/null 2>&1
+}
+
+ex () {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+title () {
+	echo -ne  "\e]0;$@\a"
+}
+
+bluetoothctl-reconnect () {
+	bluetoothctl disconnect $@
+	bluetoothctl connect $@
+}
+
+# export TERM="xterm-kitty"
+# [[ $TERM == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
