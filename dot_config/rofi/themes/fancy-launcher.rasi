@@ -1,0 +1,103 @@
+configuration {
+	display-drun:    "Activate";
+	display-run:     "Execute";
+	show-icons:      true;
+	sidebar-mode:    false;
+}
+
+* {
+	text-color:	  @foreground-normal;
+}
+
+window {
+	location:	  center;
+	anchor:		  center;
+	x-offset:     0px;
+	padding:	  15% 25%;
+	fullscreen:	  true;
+	background-color: @window-background;
+}
+
+inputbar {
+     children: [ entry ];
+}
+
+listview {
+	columns: 6;
+	spacing: 0em;
+	dynamic: true;
+	cycle:   true;
+}
+
+entry {
+	expand: 			true;
+	text-color:     	@foreground-normal;
+	background-color: 	@entry-background;
+	horizontal-align: 	0.5;
+	padding:        	12px;
+}
+
+element { 
+	orientation: vertical;
+	padding: 16;
+	border:  0 0 5px 0 solid;
+}
+
+element-icon {
+	size: 64px;
+}
+
+element-text {
+	horizontal-align: 0.5;
+}
+
+element normal.normal {
+	background-color: @normal-background;
+	text-color:       @normal-foreground;
+	border-color:	  @normal-highlight;
+}
+element alternate.normal {
+	background-color: @normal-background;
+	text-color:       @normal-foreground;
+	border-color:	  @normal-highlight;
+}
+element selected.normal {
+	background-color: @selected-normal-background;
+	text-color:       @selected-normal-foreground;
+	border-color:	  @normal-highlight;
+}
+
+element normal.urgent {
+	background-color: @urgent-background;
+	text-color:       @urgent-foreground;
+	border-color:     @urgent-highlight;
+}
+element alternate.urgent {
+	background-color: @urgent-background;
+	text-color:       @urgent-foreground;
+	border-color:	  @urgent-highlight;
+}
+element selected.urgent {
+	background-color: @selected-urgent-background;
+	text-color:       @selected-urgent-foreground;
+	border-color:	  @urgent-highlight;
+}
+
+element normal.active {
+	background-color: @active-background;
+	text-color:       @active-foreground;
+	border-color:	  @active-highlight;
+}
+element alternate.active {
+	background-color: @active-background;
+	text-color:       @active-foreground;
+	border-color:	  @active-highlight;
+}
+element selected.active {
+	background-color: @selected-active-background;
+	text-color:       @selected-active-foreground;
+	border-color:	  @active-highlight;
+}
+
+@import "~/.config/rofi/theme.rasi"
+

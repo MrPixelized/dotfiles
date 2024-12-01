@@ -1,0 +1,78 @@
+
+* {
+padding: 0;
+margin: 0;
+border: 0;
+
+background-emphasis: #00000088;
+background-normal: #00000000;
+foreground-emphasis: #f6f6ef;
+foreground-normal: #c4c5b5;
+urgent-highlight: #f4005f;
+active-highlight: #9d65ff;
+normal-highlight: #00000000;
+
+background-color: #00000000;
+window-background: #00000088;
+entry-background: @background-emphasis;
+
+selected-normal-foreground: @foreground-emphasis;
+normal-foreground: @foreground-normal;
+selected-normal-background: @background-emphasis;
+normal-background: @background-normal;
+
+selected-urgent-foreground: @foreground-emphasis;
+urgent-foreground: @foreground-emphasis;
+selected-urgent-background: @background-emphasis;
+urgent-background: @background-normal;
+
+selected-active-foreground: @foreground-emphasis;
+active-foreground: @foreground-emphasis;
+selected-active-background: @background-emphasis;
+active-background: @background-normal;
+
+text-color: #c4c5b5;
+font: "FiraCode Nerd Font 12";
+}
+
+mainbox {
+children: [listview, inputbar];
+}
+
+window {
+anchor: southwest;
+location: southwest;
+width: 100%;
+
+y-offset: 2px;
+
+background-color: @window-background;
+}
+
+listview {
+enabled: true;
+fixed-height: false;
+reverse: true;
+
+background-color: @normal-background;
+}
+
+element selected {
+background-color: @selected-normal-background;
+text-color: @selected-normal-foreground;
+}
+
+inputbar {
+background-color: black;
+}
+
+entry {
+height: 12px;
+}
+
+element-icon {
+size: 16px;
+margin-top: -2px;
+}
+
+/* vim: syntax=css

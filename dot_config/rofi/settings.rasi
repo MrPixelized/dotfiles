@@ -1,0 +1,22 @@
+
+* {
+background-emphasis: #c4c5b5;
+background-normal: #00000088;
+foreground-emphasis: #000000;
+foreground-normal: #c4c5b5;
+normal-highlight: transparent;
+
+background-color: transparent;
+window-background: transparent;
+entry-background: #000000;
+
+selected-normal-foreground: @foreground-emphasis;
+selected-normal-background: @background-emphasis;
+normal-foreground: @foreground-normal;
+normal-background: @background-normal;
+
+text-color: #c4c5b5;
+font: "monospace 12";
+}
+
+/* vim: syntax=css

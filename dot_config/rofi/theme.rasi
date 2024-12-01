@@ -1,0 +1,35 @@
+
+* {
+background-emphasis: #00000088;
+background-normal: #00000000;
+foreground-emphasis: #f6f6ef;
+foreground-normal: #c4c5b5;
+urgent-highlight: #f4005f;
+active-highlight: #9d65ff;
+normal-highlight: #00000000;
+
+background-color: #00000000;
+window-background: #00000088;
+entry-background: @background-emphasis;
+
+selected-normal-foreground: @foreground-emphasis;
+normal-foreground: @foreground-normal;
+selected-normal-background: @background-emphasis;
+normal-background: @background-normal;
+
+selected-urgent-foreground: @foreground-emphasis;
+urgent-foreground: @foreground-emphasis;
+selected-urgent-background: @background-emphasis;
+urgent-background: @background-normal;
+
+selected-active-foreground: @foreground-emphasis;
+active-foreground: @foreground-emphasis;
+selected-active-background: @background-emphasis;
+active-background: @background-normal;
+
+text-color: #c4c5b5;
+font: "monospace 12";
+}
+
+/* vim: syntax=css
+

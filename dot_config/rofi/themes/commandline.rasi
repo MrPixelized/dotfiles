@@ -1,0 +1,57 @@
+configuration {
+	display-drun: ":open ";
+	display-window: "/";
+	display-dmenu: ":";
+
+	show-icons: true;
+}
+
+mainbox {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	children: [listview, inputbar];
+}
+
+window {
+	padding: 0;
+	margin: 0;
+	border: 0;
+
+	anchor: southwest;
+	location: southwest;
+	width: 100%;
+
+	/*y-offset: 2px;*/
+
+	background-color: @window-background;
+}
+
+listview {
+	enabled: true;
+	fixed-height: false;
+	reverse: true;
+
+	background-color: @normal-background;
+}
+
+element selected {
+	background-color: @selected-normal-background;
+	text-color: @selected-normal-foreground;
+}
+
+element-text selected {
+	background-color: inherit;
+	text-color: inherit;
+}
+
+inputbar {
+	padding: 0;
+	margin: -3;
+	border: 2;
+	background-color: @entry-background;
+}
+
+@import "settings"
+
+/* vim: syntax=css
