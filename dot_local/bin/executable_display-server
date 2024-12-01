@@ -1,0 +1,9 @@
+#! /bin/bash
+
+if [ -n "$WAYLAND_DISPLAY" ]; then
+	echo "wayland"
+elif [ -n "$DISPLAY" ]; then
+	echo "x11"
+else
+	echo "tty"
+fi
