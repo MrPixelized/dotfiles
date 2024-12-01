@@ -1,0 +1,10 @@
+[Unit]
+Description=Light-locker locking mechanism
+Documentation=man:light-locker(1)
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=light-locker --lock-on-suspend --lock-on-lid --lock-after-screensaver=0
+
+[Install]
+WantedBy=graphical-session.target

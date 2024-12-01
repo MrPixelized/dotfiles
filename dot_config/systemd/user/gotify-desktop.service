@@ -1,0 +1,9 @@
+[Unit]
+Description=Gotify-desktop notification receiving daemon
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/gotify-desktop
+
+[Install]
+WantedBy=graphical-session.target

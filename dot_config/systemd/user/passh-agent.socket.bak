@@ -1,0 +1,5 @@
+[Unit]
+Description=Passh-agent Activation Socket
+
+[Service]
+ListenStream=/var/run/user/%U/passh-agent.sock

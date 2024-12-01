@@ -1,0 +1,14 @@
+[Unit]
+Description=Noisetorch Noise Cancelling
+Requires=sys-devices-pci0000:00-0000:00:1f.3-sound-card0-controlC0.device
+After=sys-devices-pci0000:00-0000:00:1f.3-sound-card0-controlC0.device
+After=pulseaudio.service
+
+[Service]
+type=Simple
+RemainAfterExit=yes
+ExecStart=%h/.local/bin/start-noisetorch
+ExecStop=%h/.local/bin/stop-noisetorch
+
+[Install]
+WantedBy=default.target

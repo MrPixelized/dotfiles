@@ -1,0 +1,1 @@
+(split horizontal:0.5:0 (clients vertical:1 0x580000e 0x5800034) (clients vertical:0 0x5a00003))

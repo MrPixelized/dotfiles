@@ -1,0 +1,11 @@
+[Unit]
+Description=Picom compositor
+Documentation=man:picom(1)
+PartOf=herbstluftwm.target
+
+[Service]
+ExecStart=/usr/bin/picom
+ExecReload=/usr/bin/kill -SIGUSR1 $MAINPID
+
+[Install]
+WantedBy=herbstluftwm.target

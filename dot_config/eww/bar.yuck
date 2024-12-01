@@ -1,0 +1,200 @@
+(defwindow bar
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "22px"
+    :anchor "center top"
+  )
+  :stacking "fg"
+  :reserve (struts
+    :distance "40px"
+    :side "top"
+  )
+  :focusable false
+  :exclusive true
+  :windowtype "dock"
+  
+  (bar)
+)
+
+(defwidget bar []
+  (centerbox
+    (box
+      :halign "start"
+      :space-evenly false
+      :spacing 20
+
+      (workspaces)
+      (windowtitle)
+    )
+    (clock)
+    (box
+      :halign "end"
+      :space-evenly false
+      :spacing 10
+
+      (systray
+        :pack-direction "rtl"
+        :icon-size 14
+      )
+      (network)
+      (brightness)
+      (volume)
+      (microphone)
+      (battery)
+    )
+  )
+)
+
+(defwidget windowtitle []
+  (box
+	:orientation "horizontal"
+    :halign "start"
+
+	(label
+	  :text "${windowtitle}"
+	)
+  )
+)
+
+(defwidget workspaces []
+  (box
+  	:orientation "horizontal"
+  	:halign "start"
+
+    (for workspace in workspaces
+      (button
+        :onclick "hyprctl dispatch workspace ${workspace.id}"
+        :class {workspace.active ? "active" : "inactive"}
+
+        {workspace.id}
+      )
+    )
+  )
+)
+
+(defwidget network []
+  (box
+    :orientation "horizontal"
+    :halign "end"
+
+    (button
+      :onclick "hyprctl dispatch -- exec [float] xdg-open http://nmcheck.gnome.org/"
+
+      {"󰖩"}
+    )
+  )
+)
+
+(defwidget clock []
+  (box
+	:orientation "horizontal"
+    :halign "center"
+
+	(label
+	  :text "${clock}"
+	)
+  )
+)
+
+(defwidget brightness []
+  (eventbox
+    :onscroll `~/.config/herbstluftwm/scripts/setbrightness.sh {} 1`
+
+    (box
+      :orientation "horizontal"
+      :halign "end"
+      
+      (label
+        :text "󰌵"
+      )
+      (label
+        :text "${brightness}%"
+      )
+    )
+  )
+)
+
+(defwidget volume []
+  (eventbox
+    :onscroll `~/.config/herbstluftwm/scripts/setvolume.sh {} 1`
+    :onclick `~/.config/herbstluftwm/scripts/setvolume.sh toggle`
+
+    (box
+      :orientation "horizontal"
+      :halign "end"
+      :class {volume.mute == "yes" ? "alert" : ""}
+      
+      (label
+        :text {
+          volume.mute == "yes" ? "" :
+          volume.value == "0" ? "" :
+          ""
+        }
+      )
+      (label
+        :text "${volume.value}%"
+      )
+    )
+  )
+)
+
+(defwidget microphone []
+  (eventbox
+    :onclick `~/.config/herbstluftwm/scripts/setmic.sh real-toggle`
+
+    (box
+      :orientation "horizontal"
+      :halign "end"
+      :class {microphone.mute == "yes" ? "alert" : ""}
+      
+      (label
+        :text {
+          microphone.mute == "yes" ? "󰍭" :
+          microphone.mute == "no" ? "󰍬" :
+          "󱦉"
+        }
+      )
+      (label
+        :text "${microphone.value}%"
+      )
+    )
+  )
+)
+
+(defwidget battery []
+  (box
+  	:orientation "horizontal"
+  	:halign "end"
+    :class {battery.value < 10 ? "alert" : ""}
+  	
+    (label
+      :text "${battery.icon}"
+  	)
+  	(label
+  	  :text "${battery.value}%"
+    )
+  )
+)
+
+(deflisten windowtitle `~/.config/eww/modules/windowtitle.sh`)
+(deflisten clock `~/.config/eww/modules/clock.sh`)
+(deflisten brightness `~/.config/eww/modules/brightness.sh`)
+(deflisten microphone `~/.config/eww/modules/microphone.sh`)
+(deflisten volume `~/.config/eww/modules/volume.sh`)
+(deflisten battery
+  :initial `{"value": "-1", "icon": ""}`
+
+  `~/.config/eww/modules/battery.sh`
+)
+(deflisten workspaces
+  :initial `[]`
+
+  `~/.config/eww/modules/workspaces.sh`
+)
+(deflisten monitor
+  :initial `0`
+
+  `~/.config/eww/modules/monitor.sh`
+)

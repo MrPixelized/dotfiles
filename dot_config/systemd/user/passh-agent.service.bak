@@ -1,0 +1,8 @@
+[Unit]
+Description=Pass SSH key agent
+Requires=passh-agent.socket
+
+[Service]
+Type=simple
+Environment="RUST_BACKTRACE=1 XDG_RUNTIME_DIR=/var/run/user/1000/"
+ExecStart=/usr/bin/passh-agent

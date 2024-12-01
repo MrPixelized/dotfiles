@@ -1,0 +1,9 @@
+[Unit]
+Description=Service to remove herbstluftwm frames on empty tags
+PartOf=herbstluftwm.target
+
+[Service]
+ExecStart=/home/ischa/.config/herbstluftwm/scripts/removeframes.sh
+
+[Install]
+WantedBy=herbstluftwm.target

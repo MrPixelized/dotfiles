@@ -1,0 +1,10 @@
+[Unit]
+Description=Eww status bar
+PartOf=hyprland.target
+
+[Service]
+ExecStart=%h/.config/eww/bar.sh
+ExecStop=eww kill
+
+[Install]
+WantedBy=hyprland.target

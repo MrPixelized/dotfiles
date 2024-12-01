@@ -1,0 +1,11 @@
+[Unit]
+Description=Unclutter cursor hider
+Documentation=man:unclutter-xfixes(1)
+PartOf=herbstluftwm.target
+
+[Service]
+ExecStart=unclutter --ignore-scrolling
+ExecReload=/usr/bin/kill -SIGUSR1 $MAINPID
+
+[Install]
+WantedBy=herbstluftwm.target

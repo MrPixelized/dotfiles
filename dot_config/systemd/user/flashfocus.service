@@ -1,0 +1,9 @@
+[Unit]
+Description=Flashfocus
+PartOf=herbstluftwm.target
+
+[Service]
+ExecStart=/home/ischa/.local/bin/flashfocus
+
+[Install]
+WantedBy=herbstluftwm.target

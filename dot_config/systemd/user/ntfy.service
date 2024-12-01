@@ -1,0 +1,9 @@
+[Unit]
+Description=Ntfy notification receiving daemon
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=bash -c 'ntfy sub -u "contact:$(pass ischa.dev/contact)" -C'
+
+[Install]
+WantedBy=graphical-session.target

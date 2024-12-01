@@ -1,0 +1,46 @@
+snippet date "Insert date"
+`!v strftime("%Y-%m-%d")`
+endsnippet
+
+snippet ddate "Insert formatted dateline"
+`!v strftime("%B %d, %Y")`
+endsnippet
+
+snippet 1, "1 argument" i
+${1:arg1}
+endsnippet
+
+snippet 2, "2 arguments" i
+${1:arg1}, ${2:arg2}
+endsnippet
+
+snippet 3, "3 arguments" i
+${1:arg1}, ${2:arg2}, ${3:arg3}
+endsnippet
+
+snippet 4, "4 arguments" i
+${1:arg1}, ${2:arg2}, ${3:arg3}, ${4:arg4}
+endsnippet
+
+snippet 5, "5 arguments" i
+${1:arg1}, ${2:arg2}, ${3:arg3}, ${4:arg4}, ${5:arg5}
+endsnippet
+
+snippet box
+`!p width = max(map(len, t[1].split('\n'))) + 2`
+`!p height = t[1].count('\n')`
+`!p snip.rv = '┌' + '─' * width + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * width + '┘'`
+$0
+endsnippet
+
+snippet lipsum
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+in culpa qui officia deserunt mollit anim id est laborum.
+$0
+endsnippet

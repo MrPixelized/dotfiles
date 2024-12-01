@@ -1,0 +1,25 @@
+[user]
+	email = contact@ischa.dev
+	name = Ischa Abraham
+[sendemail]
+	smtpserver = mail.ischa.dev
+	smtpuser = contact
+	; smtpencryption = tls
+	; smtpserverport = 587
+[pull]
+	rebase = false
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = true
+[alias]
+	d = difftool
+[receive]
+	denyDeleteCurrent = ignore
+[merge]
+	tool = vimdiff
+[credential]
+	helper = /home/ischa/.config/git/git-credential-pass
+	username = contact@ischa.dev
+[credential "git.overleaf.com"]
+	username = contact@ischa.dev

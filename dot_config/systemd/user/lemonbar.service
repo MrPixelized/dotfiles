@@ -1,0 +1,10 @@
+[Unit]
+Description=Lemonbar status bar
+Documentation=man:lemonbar(1)
+PartOf=herbstluftwm.target
+
+[Service]
+ExecStart=/home/ischa/.config/lemonbar/bar.sh
+
+[Install]
+WantedBy=herbstluftwm.target

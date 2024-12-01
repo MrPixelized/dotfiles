@@ -1,0 +1,5 @@
+[Unit]
+Description=Shutdown computer at 22:00
+
+[Service]
+ExecStart=%h/.local/bin/shutdown-at-time 22:00:00

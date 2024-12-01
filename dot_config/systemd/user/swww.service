@@ -1,0 +1,11 @@
+[Unit]
+Description=Swww wallpaper daemon
+Before=hyprland.target
+
+[Service]
+ExecStartPre=sleep 1
+ExecStart=swww-daemon
+ExecStartPost=%h/.local/bin/setbg --restore
+
+[Install]
+WantedBy=hyprland.target

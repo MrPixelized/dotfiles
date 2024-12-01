@@ -1,0 +1,9 @@
+[Unit]
+Description=Shut down system in time to go to bed
+
+[Timer]
+OnCalendar=*-*-* 21:57:00
+
+[Install]
+WantedBy=timers.target
+

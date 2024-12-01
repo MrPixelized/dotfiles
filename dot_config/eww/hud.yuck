@@ -1,0 +1,31 @@
+(defwindow hud
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "25%"
+    :height "100%"
+    :anchor "bottom right"
+  )
+  :stacking "fg"
+  :focusable false
+  :exclusive true
+  :windowtype "dock"
+  
+  (hud)
+)
+
+(defwidget hud []
+  (box
+    :orientation "vertical"
+
+    (calendar
+      :show-details true
+      :show-heading true
+      :onclick "khal list -f '{title}' {0}/{1}/{2}"
+    )
+
+    ; (systray
+      ; :height "20px"
+    ; )
+  )
+)

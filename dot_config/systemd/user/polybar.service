@@ -1,0 +1,11 @@
+[Unit]
+Description=Polybar status bar
+Documentation=man:polybar(1)
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/home/ischa/.config/polybar/launch.sh
+ExecReload=/usr/bin/kill -SIGUSR1 $MAINPID
+
+[Install]
+WantedBy=graphical-session.target

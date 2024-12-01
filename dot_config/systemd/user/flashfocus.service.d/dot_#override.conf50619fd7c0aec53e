@@ -1,0 +1,6 @@
+### Editing /home/ischa/.config/systemd/user/flashfocus.service.d/override.conf
+### Anything between here and the comment below will become the contents of the drop-in file
+
+
+
+### Edits below this comment will be discarded
