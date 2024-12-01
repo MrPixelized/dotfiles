@@ -128,9 +128,9 @@
       
       (label
         :text {
-          volume.mute == "yes" ? "" :
-          volume.value == "0" ? "" :
-          ""
+          volume.mute == "yes" ? " " :
+          volume.value == "0" ? " " :
+          " "
         }
       )
       (label
