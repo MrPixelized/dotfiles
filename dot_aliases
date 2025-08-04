@@ -9,7 +9,20 @@ alias ls="ls --color"
 alias venv="venv-activate"
 alias hc="herbstclient"
 alias la="ls --color -A"
-alias hledger bs="hledger bs --pretty"
+
+demo() {
+	castname=$(mktemp ~/.local/share/asciinema/XXXXXX.cast)
+	v2castname=${castname%.cast}.v2.cast
+	gifname=~/videos/terminal-demos/$(date "+%Y-%m-%d %H-%M-%S").gif
+
+	asciinema record "$castname"
+	asciinema convert -f asciicast-v2 "$castname" "$v2castname"
+	agg --font-size 20 --speed 1.5 --renderer fontdue "$v2castname" "$gifname"
+
+	echo "$gifname"
+	# qutebrowser "$gifname"
+	# xclip < "$gifname"
+}
 
 cr() {
     while IFS= read -r line; do
@@ -43,15 +56,6 @@ venv-activate () {
 	source "$(pwd)/$venv/bin/activate"
 }
 
-soundcloud-sync () {
-	if [ -d ~/music/soundcloud ] || sshfs sync@ischa.dev:music ~/music; then
-		pushd
-		cd ~/music/soundcloud
-		youtube-dl https://soundcloud.com/pixelized-2/likes --add-metadata
-		popd
-	fi
-}
-
 cs () {
 	cd "$@" && ls
 }
@@ -60,7 +64,7 @@ beep () {
   if [ -z $1 ] ; then
 	1=1
   fi
-  ffplay -f lavfi -i "sine=frequency=1200:duration=$1" -autoexit -nodisp >/dev/null 2>&1
+  ffplay -f lavfi -i "sine=frequency=1000:duration=$1" -autoexit -nodisp >/dev/null 2>&1
 }
 
 ex () {

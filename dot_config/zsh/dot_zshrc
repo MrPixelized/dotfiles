@@ -2,23 +2,29 @@
 autoload -U colors && colors
 
 # Set the prompt based on the session type
-[[ -z $(who am i) ]] &&
-PROMPT="%{$fg[green]%}%n@%m:%{$fg_bold[blue]%}%2~%{$reset_color%}%(!.#.$) " ||
-PROMPT="%{$fg[green]%}%n@%m:%{$fg_bold[blue]%}%2~%{$reset_color%} %(!.#.$) "
+if [[ $ASCIINEMA_REC = 1 ]]; then
+	PROMPT="> "
+elif [[ -z $(who am i) ]]; then
+	PROMPT="%{$fg[green]%}%n@%m:%{$fg_bold[blue]%}%2~%{$reset_color%}%(!.#.$) "
+else
+	PROMPT="%{$fg[green]%}%n@%m:%{$fg_bold[blue]%}%2~%{$reset_color%}%(!.#.$) "
+fi
 
 # Add timestamp info
-PROMPT="%{$fg[yellow]%}%D{%T} "$PROMPT
-# TMOUT=1
-# TRAPALRM() { zle reset-prompt }
-# preexec() { zle reset-prompt }
-reset-prompt-and-accept-line() {
-    zle reset-prompt
-    zle accept-line
-}
+if [[ $ASCIINEMA_REC != 1 ]]; then
+	PROMPT="%{$fg[yellow]%}%D{%T} "$PROMPT
+	# TMOUT=1
+	# TRAPALRM() { zle reset-prompt }
+	# preexec() { zle reset-prompt }
+	reset-prompt-and-accept-line() {
+		zle reset-prompt
+		zle accept-line
+	}
 
-zle -N reset-prompt-and-accept-line
+	zle -N reset-prompt-and-accept-line
 
-bindkey '^m' reset-prompt-and-accept-line
+	bindkey '^m' reset-prompt-and-accept-line
+fi
 
 # Import aliases
 source ~/.aliases
@@ -110,3 +116,6 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
+
+# Prevent highlighted percentage sign from showing up all the time
+unsetopt PROMPT_SP

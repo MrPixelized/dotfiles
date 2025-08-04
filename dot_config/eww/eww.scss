@@ -1,39 +1,6 @@
-// $color-fg: #c4c5b5;
-// $color-bg: #000000;
-// $color-fg: #ffffff;
-// $color-bg: rgba(0, 0, 0, 0);
-$color-fg: #c4c5b5;
-$color-bg: rgba(0, 0, 0, 0.7);
-$color-fg-active: $color-fg;
-$color-bg-active: #9d65ff;
-$color-fg-alert: #f4005f;
-$color-bg-alert: transparent;
+@import "base/base.scss";
 
-window {
-	background-color: $color-bg;
-}
+@import "bar/bar.scss";
 
-* {
-	font: 16px monospace;
-	color: $color-fg;
-	// text-shadow: black 0.75px 	0px 	1px,
-				 // black 0px 		0.75px 	1px,
-				 // black -0.75px 	0px 	1px,
-				 // black 0px 		-0.75px 	1px,
-				 // black 0px 		0px 	3px;
-}
-
-button {
-	all: unset;
-	min-width: 1.75em;
-}
-
-*.active, *.active label {
-	background-color: $color-bg-active;
-	color: $color-fg-active;
-}
-
-*.alert, *.alert label {
-	background-color: $color-bg-alert;
-	color: $color-fg-alert;
-}
+// @import "float/float.scss";
+// @import "hud/hud.scss";

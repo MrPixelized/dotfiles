@@ -3,7 +3,7 @@ Description=Eww status bar
 PartOf=hyprland.target
 
 [Service]
-ExecStart=%h/.config/eww/bar.sh
+ExecStart=%h/.config/eww/bar/launch.sh
 ExecStop=eww kill
 
 [Install]

@@ -1,2 +1,3 @@
-(include "./bar.yuck")
-(include "./hud.yuck")
+(include "./bar/bar.yuck")
+(include "./hud/hud.yuck")
+(include "./float/float.yuck")

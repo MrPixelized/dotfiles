@@ -25,13 +25,13 @@ settings:
         <Ctrl+Shift+Return>: tab-clone -w
         <Ctrl+Shift+Space>: tab-clone -w
         ed: download-open
-        eo: open-editor
+        eo: edit-text
         ep: spawn --userscript qute-pass
+        et: edit-text
         gF: spawn --userscript openfeeds
         gh: tab-give 0
         tb: config-cycle statusbar.show in-mode always
-        td: config-cycle content.user_stylesheets "~/.config/qutebrowser/css/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css"
-          ""
+        td: config-cycle colors.webpage.darkmode.enabled true false
         tl: config-cycle content.user_stylesheets "~/.config/qutebrowser/css/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css"
           ""
         tt: config-cycle tabs.show switching always
@@ -60,7 +60,7 @@ settings:
   colors.webpage.darkmode.algorithm:
     global: lightness-cielab
   colors.webpage.darkmode.enabled:
-    global: false
+    global: true
   colors.webpage.preferred_color_scheme:
     global: auto
   content.autoplay:
@@ -104,12 +104,12 @@ settings:
       accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
   content.headers.user_agent:
     global: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko)
-      {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
+      {upstream_browser_key}/{upstream_browser_version_short} Safari/{webkit_version}
     https://accounts.google.com/*: Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101
       Firefox/90.0
   content.javascript.clipboard:
     '*': none
-    global: none
+    global: access
     odysee.com: access
   content.javascript.enabled:
     '*.ischa.dev': true
@@ -133,6 +133,7 @@ settings:
     https://meet.google.com: true
     https://meet.jit.si: true
     https://rijksvideo.webex.com: true
+    https://teams.live.com: true
     https://teams.microsoft.com: true
     https://us02web.zoom.us: true
     https://us04web.zoom.us: true
@@ -146,6 +147,7 @@ settings:
     https://meet.google.com: true
     https://meet.jit.si: true
     https://rijksvideo.webex.com: true
+    https://teams.live.com: true
     https://teams.microsoft.com: true
     https://uva-live.zoom.us: true
   content.media.video_capture:
@@ -159,6 +161,7 @@ settings:
     https://meet.google.com: true
     https://meet.jit.si: true
     https://rijksvideo.webex.com: true
+    https://teams.live.com: true
     https://teams.microsoft.com: true
     https://us02web.zoom.us: true
     https://us04web.zoom.us: true
@@ -167,6 +170,7 @@ settings:
     https://faunafutura.ai: true
     https://richardlundquist.xyz: true
   content.notifications.enabled:
+    http://localhost:29325: true
     https://app.zoom.us: true
     https://calendar.google.com: true
     https://mail.google.com: true

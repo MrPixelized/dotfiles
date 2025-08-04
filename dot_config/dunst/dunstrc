@@ -31,7 +31,7 @@
     # screen width minus the width defined in within the geometry option.
     # geometry = "320x0-800+34"
 	width = 0.2
-	height = (0, 320)
+	height = (70, 320)
 	origin = bottom-right
 	offset = (8, 8)
 
