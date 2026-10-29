@@ -1,0 +1,10 @@
+set newtab ischa.dev
+bind o fillcmdline open
+bind O fillcmdline tabopen
+bind go current_url open
+bind gO current_url tabopen
+unbind T
+
+bind K tabprev
+bind J tabnext
+
